@@ -1,6 +1,6 @@
 阅读本文前建议先阅读Prometheus官方文档，了解基础概念和使用
 ## 什么是promQL
-如何分析时序指标数据呢？Prometheus给出的答案是promQL。
+如何分析时序指标数据呢？Prometheus给出的解决方案是promQL。
 PromQL是Prometheus监控系统的查询语言。它是 Prometheus 的一项核心功能，可以对收集的**时间序列数据**进行仪表板、警报和查询，所有这些都基于同一系统中的一种统一语言。PromQL 允许您选择、聚合和运算时间序列。
 
 
@@ -314,7 +314,7 @@ func (f inspector) Visit(node Node, path []Node) (Visitor, error) {
 }
 ```
 - 表达式求值（select->block->labelMathchers->refid(tsid)->chunk03）
-
+**表达式求值是整个引擎实现最为复杂的部分，这里仅描述整体流程，具体实现细节不展开（并行计算、算子下推（时间序列选择、时间序列聚合、时间聚合、其他函数算子））**
 ``` go
 func (ng *Engine) populateSeries(querier storage.Querier, s *parser.EvalStmt) {
 	// Whenever a MatrixSelector is evaluated, evalRange is set to the corresponding range.
@@ -379,7 +379,7 @@ promQL查询慢常见原因
 - 个别标签过滤器匹配大量的时间序列
 - 函数运算复杂度高
 
-promQL 查询取决于查询语句和查询的数据，在做优化时主要也围绕着上面的三点进行，查询缩短时间范围、增加过滤标签、较少方括号中回溯窗口大小、增加查询的分辨率step，都是常见的一些方法。常见的tsdb也会提供一些工具如日志，来确定查询缓慢的sql。
+promQL 查询开销取决于查询语句和查询的数据，在做优化时主要也围绕着上面四点进行，查询缩短时间范围、增加过滤标签、减少方括号中回溯窗口大小、增加查询的分辨率step，都是常见的一些方法。常见的tsdb也会提供一些工具如日志，来确定查询缓慢的promQL。
 
 
 #### 引用
