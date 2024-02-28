@@ -3,7 +3,7 @@ apm agent
 开发依赖底层技术：Javaagent、JVMTI技术、classloader、字节码增强、SPI
 关键技术点：javaagent启动流程、classerloader加载、插件加载、transform工作流、context管理与传递
 
-agent开发设计到JVMTI、 classloader、字节码增强、大量三方框架的插桩等技术，前期开发曲线比较陡峭，且不好测试及debug，对稳定性有挑战和技术有更高要求。
+agent开发设计到JVMTI、 classloader、字节码增强、大量三方框架的插桩等技术，前期开发曲线比较陡峭，且不好测试及debug，对稳定性有挑战和对底层及三方框架运行机制要熟悉。
 
 主流APM Java agent的开发核心流程大同小异，都采取 -javaagent:/path/agent.jar参数在应用启动时挂载agent，通过自定义的classLoader加载core包和plugin包，定义transform工作流，对需要插桩的方法进行增强，核心模块负责context管理，span管理与传递，pinpoint和skywalking采用的方式都是一样的 字节码开发工具都采用ByteBuddy进行处理，plugin的加载都是采用SPI的动态加载机制，各个组件定义的agent启动工作流、协议、transform流程、协议、插桩类方法有差异。
 
@@ -34,7 +34,7 @@ https://docs.qq.com/doc/DR3dVeWZpdWVQV3Nj?code=Y8eNE_v78nYwlsIBJ3u4BoZJZw3a3jLmv
 ![阿里plugins](image-12.png)
 
 3、扩展
-都能覆盖主流的三方库，SkyWalking和OpenTelemetry都预留插件及服务的扩展，扩展较方便。SkyWalking国产开源，插件方便对国内软件适配会更好（druid、rocketMQ、nacos等）
+都能覆盖主流的三方库，SkyWalking和OpenTelemetry都预留插件及服务的扩展，扩展较方便。SkyWalking国产开源，插件方便对国内软件适配会更好（druid、rocketMQ、nacos、brpc等）
 
 4、生态
 OpenTelemetry CNCF项目，整合了metric、trace、log协议规范，已成为标准协议。
