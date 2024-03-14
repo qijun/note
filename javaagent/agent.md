@@ -62,13 +62,17 @@ SkyWalking apache项目，使用自有协议传输，collect兼容OpenTelemetry�
 | -- | ------------- | ------------- | ----- | ------ |
 | 二次开发 | 前期较高 |  低  | ----- | ------ |
 | 性能损耗 | 一般 | 低 | 低 | 一般 |
-| 扩展及插件支持 | 高 | 高,国产开源组件适配度高 | ----- | ------ |
+| 扩展及插件支持 | 友好 | 友好,国产开源组件适配度高 | ----- | ------ |
 | 生态友好 | 高 | 一般 |  ----- | ------ |
 
 差异：
-阿里云ARMS Java agent: 基于开源项目 pinpoint 二次开发，整合 arthas、sentinel、nacos等阿里自家组件, 功能强大，加上了端上聚合的能力（pinpoint- profile.jar/GeneralDataWorkHandler）。协议私有，支持多种协议透传 
+
+阿里云ARMS Java agent: 基于开源项目 pinpoint 二次开发，整合 arthas、sentinel、nacos等阿里自家组件, 功能强大（融合了诊断、治理等能力），加上了端上聚合的能力（pinpoint- profile.jar/GeneralDataWorkHandler）。协议私有，支持多种协议透传 
+
 华为云应用监控Java agent: 自研工程名lubanops，插件较少（国内使用主流三方包支持），具备端上聚合能力，指标上报周期1分钟(lubanops-apm-javaagent-bootstrap.jar/TransactionCollector)，延迟较阿里高。插件中定义搜集指标、聚合指标，埋点粒度粗
-SkyWalking agent：从工程和代码结构上说二次开发成本更低，扩展性较好，生态友好。
+
+SkyWalking agent：从工程和代码结构上说二次开发成本更低，对国产开源软件适配程度高，扩展性较好，生态友好。
+
 OpenTelemetry agent：Gradle脚本管理项目依赖及编译，编译过程复杂，有较多动态生成文件，最终会打包成一个jar包，体积较少，协议友好、扩展性好。
 
 云厂商和开源agent在端上的传输协议并不相同，阿里云ARMS Java agent对开源agent协议做了端上适配，其他agent未看到有这种处理。针对开源APM agent协议的做法，华为和阿里均在后端collect中做了协议的兼容处理。
