@@ -1,4 +1,4 @@
-### 指标集成规范
+### otel指标集成规范
 
 #### 采集方式分类
 - event聚合
@@ -48,7 +48,7 @@ MetricExporter 指标导出器
 MetricReader 定期指标读取器
 MetricProducer 指标生产者
 MetricFilter 指标过滤器
-
+PeriodicMetricReader
 
 
 ```
