@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>sample.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h3 id="%E9%87%87%E6%A0%B7">采样</h3>
+<h4 id="%E7%9B%AE%E7%9A%84">目的</h4>
+<p>平衡快速定位（具体、明细问题）根因效率和成本</p>
+<h4 id="%E9%87%87%E6%A0%B7%E6%97%B6%E6%9C%BA">采样时机</h4>
+<p>按照采样时机分类</p>
+<ul>
+<li>头部采样：Head-based sampling</li>
+<li>尾部采样：Tail-based sampling</li>
+<li>单元采样：Unitary sampling</li>
+</ul>
+<p><img src="image-13.png" alt="Alt text"></p>
+<p>头部采样</p>
+<p>【原理】这种采样策略是在入口服务接收到请求时决定整条链路是否保留，这个标记会随着链路 context，被透传到链路下游的所有相关服务。对于标记不保留的链路，所有对应的 Span 会在客户端被丢弃，不会上报。</p>
+<p>【优势】采样发生在客户端，可以显著降低挂载在业务服务器上的代理对业务服务器资源（网络 I/O 的开销）；同时因为 Span 直接被丢弃，也降低了服务端的存储和计算开销。</p>
+<p>【劣势】采样实施在链路产生初期，命中异常和慢响应的几率低，会影响故障排查。</p>
+<p>【增强】配合异常回溯上报，即每个链路节点服务在上报代理处缓存窗口期内的 Span 信息，下游链路出现异常后，可以动态扭转上游链路的采样状态，保证完整异常链路留存。当然这种缓存机制，相应也会对业务服务器产生较大的内存开销。如果不处理上游的旁支链路，可以消除缓存机制。</p>
+<p>尾部采样</p>
+<p>【原理】这种采样策略是在请求处理完成时决定整条链路是否保留。客户端会将所有 Span 都上报到调用链追踪系统后台，后台根据一定预设的规则，决定哪些链路被保留。</p>
+<p>【优势】采样实施在链路产生后，可以精准采集异常、慢响应或者根据一些业务逻辑能够辅助故障排查的链路；有效减少链路存储产生的相关资源成本。</p>
+<p>【劣势】采样发生在调用链追踪系统后台，对业务服务器资源（网络I/O的开销）的压力无缓解。</p>
+<p>单元采样</p>
+<p>【原理】各个业务模块自主决定是否上报当前节点，单个节点的采样决策不影响链路上的其他服务。</p>
+<p>【优势】避免整体业务链路采样决策影响，节点的异常信息可以精准上报；有效降低上报客户端和调用链追踪系统后台的资源压力。</p>
+<p>【劣势】链路连贯性无法保证，无法支持根据上下游进行有效根因分析。</p>
+<p>总结：agent实现基于头部采样的增强会增加agent内存消耗，也造成其他影响（span达到最大容量，对后续采样造成不可预知影响），对业务不友好。尾部采样不建议在agent端做。</p>
+<h4 id="%E9%98%BF%E9%87%8C%E9%87%87%E6%A0%B7">阿里采样</h4>
+<p>https://www.alibabacloud.com/help/zh/arms/application-monitoring/use-cases/use-trace-sampling-policies</p>
+<p>https://help.aliyun.com/zh/arms/application-monitoring/support/why-is-the-call-chain-lost?spm=5176.12818093_47.top-nav.46.3be916d0e7e70U&amp;scm=20140722.S_help%40%40%E6%96%87%E6%A1%A3%40%402503062.S_BB2%40bl%2BRQW%40ag0%2BBB1%40ag0%2Bos0.ID_2503062-RL_%E6%85%A2%E8%B0%83%E7%94%A8%E7%9A%84%E8%B0%83%E7%94%A8%E9%93%BE%E9%87%87%E6%A0%B7%E7%AD%96%E7%95%A5%E4%B8%8E%E6%99%AE%E9%80%9A%E8%AF%B7%E6%B1%82%E4%B8%80%E8%87%B4-LOC_console~UND~help-OR_ser-V_3-P0_0</p>
+<p>阿里采样分为2种：</p>
+<p>固定采样率 记录一定比例的调用链数据</p>
+<p>自适应采样 多种采样策略组合</p>
+<ul>
+<li>特定接口全采样</li>
+<li>接口Top N采样，使用变种LFU算法实现</li>
+<li>小流量兜底采样，是指在单位时间内，每个接口都至少保证有1次采样</li>
+</ul>
+<p><strong>总结：基于头部采样方式，不支持增强、不支持尾部采样，提供给业务灵活的采样配置选择，在接口维度提供自定义的场景配置。阿里针对慢请求会当成普通请求处理，错误请求会采用单元采样的方式提示采样率</strong></p>
+<p>测试结果：
+模拟a-&gt;b，b模拟慢请求1s，error请求，正常请求。每次测试10并发，发100个请求
+一次测试</p>
+<ul>
+<li>慢请求     a采样10条 b采样19条</li>
+<li>error请求. a采样10条 b采样85条</li>
+<li>正常请求.   a采样10条</li>
+</ul>
+<p>二次测试</p>
+<ul>
+<li>正常请求.   a采样10条 b采样19条</li>
+<li>慢请求     a采样10条 b采样19条</li>
+<li>error请求. a采样10条 b采样85条</li>
+</ul>
+<p>模拟a-&gt;b，每次测试10并发，发200个请求，100个正常请求100个慢请求</p>
+<ul>
+<li>a采样10条正常 10条慢</li>
+<li>b采样19条正常 19条慢</li>
+</ul>
+<h4 id="%E5%8D%8E%E4%B8%BA%E9%87%87%E6%A0%B7">华为采样</h4>
+<p>https://support.huaweicloud.com/usermanual-apm2/apm_07_0018.html</p>
+<p>采样方式：</p>
+<ul>
+<li>智能采样
+url分为错误url、慢url（默认800ms、用户自定义配置）、正常url三种url，每种url调用链数据的采样率单独计算。APM的统计数据是一分钟采集上报一次，第一个采集周期所有url调用链数据都按正常url采样。第二个采集周期时，根据上一个采集周期的统计数据，将url分类为错误url、慢url、正常url三种url。
+针对错误url、慢url的采样率会提高采样的数量</li>
+<li>全采样（代码有，未开放）</li>
+<li>按频率（代码有，未开放）</li>
+<li>按百分比（代码有，未开放）</li>
+</ul>
+<p><strong>总结：基于头部采样方式，不支持增强、不支持尾部采样，在接口维度做区分错误url、慢url，提高这些标记的url采样率。</strong></p>
+<p>测试结果：</p>
+<p>模拟a-&gt;b，b模拟慢请求1s，error请求，正常请求。每次测试100并发，发100个请求。连续2分钟</p>
+<p>慢请求    周期一 a 20 b 20 周期二 a 20 b 100</p>
+<h4 id="trace%E9%87%87%E6%A0%B7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1">trace采样解决方案设计</h4>
+<p>指标定位应用级别异常，trace定位具体问题细节（接口或其他业务维度问题）
+支持策略：头部采样+灵活且强大的后台采样配置能力（业务维度自定义采样）+ 采样限额</p>
+<p>设计目标：</p>
+<ul>
+<li>采样的链路尽可能覆盖所有调用拓扑</li>
+<li>采样链路尽可能完整</li>
+<li>异常、错误、慢调用尽可能采集</li>
+<li>提供灵活的采样配置支持用户定义重点关注链路</li>
+</ul>
+<p>一期（V1.5.1）支持：
+固定采样：</p>
+<ul>
+<li>采样率按接口维度生效</li>
+<li>支持针对特定接口配置采样率</li>
+<li>异常、错误、慢请求采用单元采样（不向上下游传递）</li>
+<li>支持小流量接口兜底，最少采集1条（看实现和排期确定是否做）
+其他：
+链路列表有全链路信息且异常的span特殊标记出来</li>
+</ul>
+<p>自适应采样（待排期）：</p>
+<ul>
+<li>支持接口全采样</li>
+<li>支持针对接口维度采用topn</li>
+<li>支持小流量接口兜底</li>
+<li>以上采样算法合并使用</li>
+</ul>
+<p><img src="image-14.png" alt="Alt text"></p>
+<p><strong>应对场景分析：</strong></p>
+<ul>
+<li>核心应用核心链路重大保障（如金融）：每个异常都需要尽可能被关注，回溯，保留现场。建议采用核心接口（tag、resource）全采样、或者采用链路追踪方式在collect使用尾部采样处理</li>
+<li>核心业务：通过配置提高核心业务相关链路的采样率</li>
+<li>通用场景：固定采样，覆盖所有接口的采样。针对异常和慢调用，可以在指标概览中查看定位，再结合全链路的trace和log定位问题明细</li>
+</ul>
+<p>偶发的慢应用或异常默认采样没有采集到完整链路的场景（概率很小）：</p>
+<ul>
+<li>方案一：指标定位到接口粒度，增加自定义方法到方法粒度，缩小故障范围。针对具体接口或者tag提高采样率或者设置100%</li>
+<li>方案二：打开Arthas,使用trace命令开启实时跟踪到方法参数级别</li>
+</ul>
+<h4 id="%E5%85%B6%E4%BB%96">其他</h4>
+<p>otel采样流程
+<img src="SdkSpanBuilder_startSpan.png" alt="Alt text"></p>
+
+</body>
+</html>
